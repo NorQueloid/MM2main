@@ -1,1 +1,73 @@
-loadstring(game:HttpGet("https://api.overdrivehub.xyz/v1/auth"))()
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+ScreenGui.Name = "LoadingGUI"
+ScreenGui.ResetOnSpawn = false
+
+-- Fullscreen background frame
+local background = Instance.new("Frame")
+background.Parent = ScreenGui
+background.Size = UDim2.new(1, 1, 1, 1)  -- Fullscreen size
+background.Position = UDim2.new(0, 0, 0, 0)  -- Position is at the top-left corner
+background.BackgroundColor3 = Color3.fromRGB(15, 15, 15)  -- Dark background color
+
+-- Title
+local title = Instance.new("TextLabel")
+title.Parent = background
+title.Size = UDim2.new(0.6, 0, 0.1, 0)
+title.Position = UDim2.new(0.2, 0, 0.3, 0)
+title.Text = "NorQ Hub Loading..."
+title.TextScaled = true
+title.TextColor3 = Color3.fromRGB(255, 255, 255)
+title.BackgroundTransparency = 1
+title.Font = Enum.Font.GothamBold
+
+-- Progress Bar Background
+local progressBarBG = Instance.new("Frame")
+progressBarBG.Parent = background
+progressBarBG.Size = UDim2.new(0.6, 0, 0.05, 0)
+progressBarBG.Position = UDim2.new(0.2, 0, 0.45, 0)
+progressBarBG.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+progressBarBG.BorderSizePixel = 0
+progressBarBG.ClipsDescendants = true
+progressBarBG.BackgroundTransparency = 0.1
+
+-- Progress Bar
+local progressBar = Instance.new("Frame")
+progressBar.Parent = progressBarBG
+progressBar.Size = UDim2.new(0, 0, 1, 0)
+progressBar.Position = UDim2.new(0, 0, 0, 0)
+progressBar.BackgroundColor3 = Color3.fromRGB(0, 170, 255)
+progressBar.BorderSizePixel = 0
+
+-- Percentage Text
+local percentage = Instance.new("TextLabel")
+percentage.Parent = background
+percentage.Size = UDim2.new(0.2, 0, 0.05, 0)
+percentage.Position = UDim2.new(0.4, 0, 0.52, 0)
+percentage.Text = "0%"
+percentage.TextScaled = true
+percentage.BackgroundTransparency = 1
+percentage.TextColor3 = Color3.fromRGB(255, 255, 255)
+percentage.Font = Enum.Font.Gotham
+
+-- Credits Text
+local credit = Instance.new("TextLabel")
+credit.Parent = background
+credit.Size = UDim2.new(1, 0, 0.05, 0)
+credit.Position = UDim2.new(0, 0, 0.58, 0)
+credit.Text = "Best MM2 Scripts HUB by Norqueloid"
+credit.TextScaled = true
+credit.BackgroundTransparency = 1
+credit.TextColor3 = Color3.fromRGB(150, 150, 150)
+credit.Font = Enum.Font.Gotham
+
+-- Progress animation with 60-second duration
+for i = 0, 100 do
+    progressBar.Size = UDim2.new(i / 100, 0, 1, 0)
+    percentage.Text = i .. "%"
+    wait(1.2)  -- 60 seconds total, so 0.6 per step (100 steps)
+end
+
+-- Remove GUI after loading
+wait(0.5)
+ScreenGui:Destroy()
